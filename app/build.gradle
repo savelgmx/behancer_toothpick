@@ -13,6 +13,13 @@ android {
         buildConfigField "String", "API_URL", '"https://www.behance.net/"'
         buildConfigField "String", "API_KEY", '"4GcG7j6w60XEn4SRoNR1mb8JNkPICNDl"'
         buildConfigField "String", "API_QUERY", '"motorcycle"'
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ toothpick_registry_package_name : 'com.elegion.test.behancer' ]
+            }
+        }
+
     }
     buildTypes {
         release {
@@ -56,6 +63,10 @@ dependencies {
 
     implementation "android.arch.lifecycle:extensions:1.1.1"
     implementation "android.arch.paging:runtime:1.0.0-beta1"
-    
+
+    implementation 'com.github.stephanenicolas.toothpick:toothpick-runtime:1.1.3'
+    implementation 'com.github.stephanenicolas.toothpick:smoothie:1.1.3'
+    annotationProcessor 'com.github.stephanenicolas.toothpick:toothpick-compiler:1.1.3'
+
     implementation 'com.squareup.picasso:picasso:2.5.2'
 }

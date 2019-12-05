@@ -12,6 +12,8 @@ import com.elegion.test.behancer.data.model.project.ProjectResponse;
 import com.elegion.test.behancer.data.model.project.RichProject;
 import com.elegion.test.behancer.utils.ApiUtils;
 
+import javax.inject.Inject;
+
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -21,7 +23,9 @@ import io.reactivex.schedulers.Schedulers;
 public class ProjectsViewModel extends ViewModel {
 
     private Disposable mDisposable;
-    private Storage mStorage;
+   // private Storage mStorage;
+    @Inject
+    Storage mStorage;
 
     private ProjectsAdapter.OnItemClickListener mOnItemClickListener;
     private MutableLiveData<Boolean> mIsLoading = new MutableLiveData<>();

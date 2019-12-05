@@ -17,13 +17,18 @@ import com.elegion.test.behancer.ui.profile.ProfileActivity;
 import com.elegion.test.behancer.ui.profile.ProfileFragment;
 import com.elegion.test.behancer.utils.CustomFactory;
 
+import javax.inject.Inject;
+
 /**
  * Created by Vladislav Falzan.
  */
 
 public class ProjectsFragment extends Fragment {
 
-    private ProjectsViewModel mProjectsViewModel;
+    //private ProjectsViewModel mProjectsViewModel;
+    //а в ProjectsFragment стопудов нужен будет
+    @Inject
+    ProjectsViewModel mProjectsViewModel;
     private ProjectsAdapter.OnItemClickListener mOnItemClickListener = username -> {
         Intent intent = new Intent(getActivity(), ProfileActivity.class);
         Bundle args = new Bundle();

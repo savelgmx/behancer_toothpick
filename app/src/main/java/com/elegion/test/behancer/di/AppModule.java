@@ -5,6 +5,7 @@ import android.arch.persistence.room.Room;
 import com.elegion.test.behancer.AppDelegate;
 import com.elegion.test.behancer.data.Storage;
 import com.elegion.test.behancer.data.database.BehanceDatabase;
+import com.elegion.test.behancer.ui.projects.ProjectsViewModel;
 
 import toothpick.config.Module;
 
@@ -20,6 +21,8 @@ public class AppModule extends Module {
         this.mApp = app;
         bind(AppDelegate.class).toInstance(mApp);
         bind(Storage.class).toInstance(provideStorage());
+       // нужно в AppModule определенно прописать
+        bind(ProjectsViewModel.class);
     }
 
     AppDelegate provideApp() {

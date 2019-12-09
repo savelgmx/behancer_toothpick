@@ -72,15 +72,10 @@ public class ProfileViewModel extends ViewModel {
     public ObservableBoolean getIsErrorVisible(){
         return mIsErrorVisible;
     }
+    public SwipeRefreshLayout.OnRefreshListener getOnRefreshListener() { return mOnRefreshListener; }
 
+    public ObservableField<User> getProfile() {return mProfile; }
 
-    public SwipeRefreshLayout.OnRefreshListener getOnRefreshListener() {
-        return mOnRefreshListener;
-    }
-
-    public ObservableField<User> getProfile() {
-        return mProfile;
-    }
 
 
 }

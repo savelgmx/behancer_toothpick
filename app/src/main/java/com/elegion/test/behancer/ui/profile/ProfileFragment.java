@@ -15,8 +15,6 @@ import android.view.ViewGroup;
 import com.elegion.test.behancer.data.Storage;
 import com.elegion.test.behancer.databinding.ProfileBinding;
 
-import javax.inject.Inject;
-
 /**
  * Created by Vladislav Falzan.
  */
@@ -27,13 +25,13 @@ import javax.inject.Inject;
 
         public static final String PROFILE_KEY = "PROFILE_KEY";
         private String mUsername;
-       /// private
-    @Inject
-       ProfileViewModel mProfileViewModel;
+       ///
+    //@Inject
+       private ProfileViewModel mProfileViewModel;
 
 
-        public static com.elegion.test.behancer.ui.profile.ProfileFragment newInstance(Bundle args) {
-            com.elegion.test.behancer.ui.profile.ProfileFragment fragment = new com.elegion.test.behancer.ui.profile.ProfileFragment();
+    public static ProfileFragment newInstance(Bundle args) {
+        ProfileFragment fragment = new ProfileFragment();
             fragment.setArguments(args);
 
             return fragment;
@@ -54,7 +52,10 @@ import javax.inject.Inject;
                     @NonNull
                     @Override
                     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-                        return (T) new ProfileViewModel(storage,mUsername);
+                    return (T) new ProfileViewModel(
+                            storage,
+                            mUsername
+                       );
                     }
                 };
                 mProfileViewModel = ViewModelProviders.of(this, factory).get(ProfileViewModel.class);
@@ -70,6 +71,7 @@ import javax.inject.Inject;
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             ProfileBinding binding = ProfileBinding.inflate(inflater,container,false);
             binding.setPm(mProfileViewModel);
+        binding.setLifecycleOwner(this);
             return binding.getRoot();
 
         }

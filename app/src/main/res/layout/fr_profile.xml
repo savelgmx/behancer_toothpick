@@ -28,6 +28,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+            <include
+                layout="@layout/v_profile"
+                bind:profile="@{pm}"
+                android:visibility="@{pm.isErrorVisible ? P.GONE : P.VISIBLE}" />
 
             <LinearLayout
                 android:layout_width="match_parent"

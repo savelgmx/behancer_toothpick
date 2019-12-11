@@ -1,6 +1,5 @@
 package com.elegion.test.behancer.ui.projects;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,13 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.elegion.test.behancer.data.Storage;
+import com.elegion.test.behancer.AppDelegate;
 import com.elegion.test.behancer.databinding.ProjectsBinding;
 import com.elegion.test.behancer.ui.profile.ProfileActivity;
 import com.elegion.test.behancer.ui.profile.ProfileFragment;
-import com.elegion.test.behancer.utils.CustomFactory;
 
 import javax.inject.Inject;
+
+import toothpick.Toothpick;
 
 /**
  * Created by Vladislav Falzan.
@@ -44,11 +44,16 @@ public class ProjectsFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof Storage.StorageOwner) {
+        Toothpick.inject(this, AppDelegate.getAppScope());
+ /*       if (context instanceof Storage.StorageOwner) {
             Storage storage = ((Storage.StorageOwner) context).obtainStorage();
             CustomFactory factory = new CustomFactory(storage, mOnItemClickListener);
             mProjectsViewModel = ViewModelProviders.of(this, factory).get(ProjectsViewModel.class);
         }
+*/
+        mProjectsViewModel.mOnItemClickListener = mOnItemClickListener;
+        mProjectsViewModel.onAttach();
+
     }
 
     @Nullable

@@ -25,8 +25,6 @@ import toothpick.Toothpick;
 
 public class ProjectsFragment extends Fragment {
 
-    //private ProjectsViewModel mProjectsViewModel;
-    //а в ProjectsFragment стопудов нужен будет
     @Inject
     ProjectsViewModel mProjectsViewModel;
     private ProjectsAdapter.OnItemClickListener mOnItemClickListener = username -> {
@@ -45,12 +43,6 @@ public class ProjectsFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         Toothpick.inject(this, AppDelegate.getAppScope());
- /*       if (context instanceof Storage.StorageOwner) {
-            Storage storage = ((Storage.StorageOwner) context).obtainStorage();
-            CustomFactory factory = new CustomFactory(storage, mOnItemClickListener);
-            mProjectsViewModel = ViewModelProviders.of(this, factory).get(ProjectsViewModel.class);
-        }
-*/
         mProjectsViewModel.mOnItemClickListener = mOnItemClickListener;
         mProjectsViewModel.onAttach();
 

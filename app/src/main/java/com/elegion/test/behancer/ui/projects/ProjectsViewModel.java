@@ -23,7 +23,6 @@ import io.reactivex.schedulers.Schedulers;
 public class ProjectsViewModel extends ViewModel {
 
     private Disposable mDisposable;
-   // private Storage mStorage;
     @Inject
     Storage mStorage;
     @Inject
@@ -38,12 +37,6 @@ public class ProjectsViewModel extends ViewModel {
     @Inject
     public  ProjectsViewModel(){super();}
 
-    public ProjectsViewModel(Storage storage, ProjectsAdapter.OnItemClickListener onItemClickListener) {
-     //   mStorage = storage;
-        mOnItemClickListener = onItemClickListener;
-        mProjects = mStorage.getProjectsPaged();
-       // updateProjects();
-    }
 
     private void updateProjects() {
         mDisposable = mApi.getProjects(BuildConfig.API_QUERY)
@@ -90,7 +83,6 @@ public class ProjectsViewModel extends ViewModel {
     }
 
     public void onAttach() {
-        //mOnItemClickListener = onItemClickListener;
         mProjects = mStorage.getProjectsPaged();
         updateProjects();
 

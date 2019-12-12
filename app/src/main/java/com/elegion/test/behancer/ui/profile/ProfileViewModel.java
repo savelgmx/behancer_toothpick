@@ -17,7 +17,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ProfileViewModel extends ViewModel {
 
-   // private Storage mStorage;
    @Inject
    Storage mStorage;
 
@@ -35,13 +34,6 @@ public class ProfileViewModel extends ViewModel {
     private ObservableBoolean mIsErrorVisible = new ObservableBoolean();
     private ObservableField<User> mProfile = new ObservableField<>();
     private SwipeRefreshLayout.OnRefreshListener mOnRefreshListener = this::loadProfile;
-
-
-    public ProfileViewModel(Storage storage, String user){
-        mStorage=storage;
-        mUsername = user;
-        loadProfile();
-    }
 
 
     public void loadProfile() {

@@ -6,6 +6,7 @@ import android.databinding.ObservableField;
 import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.elegion.test.behancer.data.Storage;
+import com.elegion.test.behancer.data.api.BehanceApi;
 import com.elegion.test.behancer.data.model.user.User;
 import com.elegion.test.behancer.utils.ApiUtils;
 
@@ -20,6 +21,12 @@ public class ProfileViewModel extends ViewModel {
    @Inject
    Storage mStorage;
 
+   @Inject
+    BehanceApi mApi;
+
+   @Inject
+   public ProfileViewModel(){super();}
+
 
     private String mUsername;
 
@@ -29,6 +36,7 @@ public class ProfileViewModel extends ViewModel {
     private ObservableField<User> mProfile = new ObservableField<>();
     private SwipeRefreshLayout.OnRefreshListener mOnRefreshListener = this::loadProfile;
 
+
     public ProfileViewModel(Storage storage, String user){
         mStorage=storage;
         mUsername = user;
@@ -37,7 +45,7 @@ public class ProfileViewModel extends ViewModel {
 
 
     public void loadProfile() {
-        mDisposable = ApiUtils.getApiService().getUserInfo(mUsername)
+        mDisposable = mApi.getUserInfo(mUsername)
                 .subscribeOn(Schedulers.io())
                 .doOnSuccess(response -> mStorage.insertUser(response))
                 .onErrorReturn(throwable ->
@@ -75,6 +83,11 @@ public class ProfileViewModel extends ViewModel {
     public SwipeRefreshLayout.OnRefreshListener getOnRefreshListener() { return mOnRefreshListener; }
 
     public ObservableField<User> getProfile() {return mProfile; }
+
+    public void onAttach(String user){
+        mUsername =user;
+        loadProfile();
+    }
 
 
 

@@ -1,8 +1,5 @@
 package com.elegion.test.behancer.ui.profile;
 
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,8 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.elegion.test.behancer.data.Storage;
+import com.elegion.test.behancer.AppDelegate;
 import com.elegion.test.behancer.databinding.ProfileBinding;
+
+import javax.inject.Inject;
+
+import toothpick.Toothpick;
 
 /**
  * Created by Vladislav Falzan.
@@ -25,9 +26,9 @@ import com.elegion.test.behancer.databinding.ProfileBinding;
 
         public static final String PROFILE_KEY = "PROFILE_KEY";
         private String mUsername;
-       ///
-    //@Inject
-       private ProfileViewModel mProfileViewModel;
+       ///  private
+    @Inject
+       ProfileViewModel mProfileViewModel;
 
 
     public static ProfileFragment newInstance(Bundle args) {
@@ -42,8 +43,10 @@ import com.elegion.test.behancer.databinding.ProfileBinding;
         public void onAttach(Context context) {
             super.onAttach(context);
             mUsername=getArguments().getString(PROFILE_KEY);
+            Toothpick.inject(this, AppDelegate.getAppScope());
 
 
+/*
             if (context instanceof Storage.StorageOwner) {
                 Storage storage = ((Storage.StorageOwner) context).obtainStorage();
                 //   mProfileViewModel = new ProfileViewModel(storage,mUsername);
@@ -62,6 +65,8 @@ import com.elegion.test.behancer.databinding.ProfileBinding;
 
 
             }
+*/
+                mProfileViewModel.onAttach(mUsername);
 
         }
 
